@@ -25,11 +25,11 @@
     src: '{{spark_target_dir}}'
     dest: '{{spark_link_dir}}'
 
-- name: copy spark.env
-  template:
-    src: 'spark.env.j2'
-    dest: '{{spark_target_dir}}/spark.env'
-    mode: '644'
+# - name: copy spark.env
+#   template:
+#     src: 'spark.env.j2'
+#     dest: '{{spark_target_dir}}/spark.env'
+#     mode: '644'
 
 - name: copy env template
   template:
