@@ -1,0 +1,6 @@
+export SPARK_HOME={{install_base_dir}}/spark
+
+export PATH=$PATH:$SPARK_HOME/bin
+{% if spark_envs is defined %}{% for key, value in spark_envs.iteritems() %}
+export {{key}}={{value}}
+{% endfor %}{% endif %}

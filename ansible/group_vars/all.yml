@@ -1,0 +1,15 @@
+---
+ansible_ssh_user: centos
+ansible_ssh_private_key_file: ~/.ssh/cdhstack_admin.pem
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+ansible_become_user: root
+ansible_become_method: sudo
+hadoop_version: 2.9.2
+spark_version : '2.4.0'
+hive_version: 2.3.4
+spark_hadoop_version : hadoop2.7
+install_base_dir: /usr/local
+data_dir: /data/hadoop
+openjdk_version: 1.8.0
+start_hdfs_services: 'no'
+alluxio_version: '1.8.1'

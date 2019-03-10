@@ -1,0 +1,24 @@
+---
+# defaults file for common
+common_yum_packages:
+  - gcc
+  - gcc-c++
+  - make
+  - 'java-{{openjdk_version}}-openjdk'
+  - 'java-{{openjdk_version}}-openjdk-devel'
+  - awscli
+  - ntp
+  - tcpdump
+  - policycoreutils-python
+  - vim
+  - yum-utils
+  - deltarpm
+  - git
+  - python-pip
+  - wget
+  - curl
+  - unzip
+  - tar
+  - mysql-connector-java
+  - firewalld
+  - R

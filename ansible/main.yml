@@ -1,0 +1,66 @@
+---
+- name: Prerequisites
+  hosts: all
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - common
+
+- name: db
+  hosts: db
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - db
+
+# - name: ldap
+#   hosts: ldap
+#   roles:
+#     - ldap
+
+# - name: kerberos
+#   hosts: kerberos
+#   roles:
+#     - kerberos
+
+- name: hadoop install
+  hosts: all
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - hadoop
+
+- name: hive install
+  hosts: masters
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - hive
+
+- name: alluxio install
+  hosts: all
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - alluxio
+
+- name: spark install
+  hosts: all
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - spark
+
+# - name: elasticsearch
+#   hosts: masters
+#   become: yes
+#   become_user: "{{ansible_become_user}}"
+#   become_method: "{{ansible_become_method}}"
+#   roles:
+#     - elasticsearch
