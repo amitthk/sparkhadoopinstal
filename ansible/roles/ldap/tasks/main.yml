@@ -26,10 +26,13 @@
     groups: "{{ ldap_server_user }}"
     state: present
 
-- name: ensure the ldap database directory exists
+#Todo: setting the permission to 777 for now to make slapd work. must run as proper user
+- name: ensure the ldap database directory exists.
   file:
     path: "/var/lib/ldap/{{ ldap_server_domain_name }}/"
     state: directory
+    mode: 0777
+    recurse: yes
     owner: "{{ ldap_server_user }}"
     group: "{{ ldap_server_user }}"
 
