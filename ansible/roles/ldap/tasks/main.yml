@@ -1,8 +1,9 @@
 ---
 # tasks file for ldap
 - name: Install the openldap and required Packages
-  yum: name={{ item }} state=installed
-  with_items: ldap_server_pkgs
+  yum:
+    name: "{{ ldap_server_pkgs }}"
+    state: installed
 
 - name: Delete the configuration directory
   file: 
