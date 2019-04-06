@@ -11,15 +11,6 @@
 
 - name: ensure core packages are installed
   yum:
-    name: "{{item}}"
-    state: present
-  become: yes
-  become_user: "{{ansible_become_user}}"
-  become_method: "{{ansible_become_method}}"
-  with_items: "{{common_yum_packages}}"
-
-- name: ensure core packages are installed
-  yum:
     name: "{{common_yum_packages}}"
     state: present
   become: yes

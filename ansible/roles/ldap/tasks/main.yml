@@ -14,14 +14,17 @@
   shell: slappasswd -s {{ ldap_server_rootpw }} 
   register: root_password
 
+- name: "Ensure group {{ ldap_server_user }} exists"
+  group:
+    name: "{{ ldap_server_user }}"
+    state: present
+
 - name: "Add the user {{ ldap_server_user }}"
   user:
     name: "{{ ldap_server_user }}"
     shell: /bin/bash
     groups: "{{ ldap_server_user }}"
     state: present
-
-
 
 - name: ensure the ldap database directory exists
   file:
