@@ -5,7 +5,9 @@
   with_items: ldap_server_pkgs
 
 - name: Delete the configuration directory
-  file: path={{ ldap_server_app_path }}/slapd.d state=absent
+  file: 
+    path: "{{ ldap_server_app_path }}/slapd.d"
+    state: absent
 
 - name: Generate the root password for ldap
   shell: slappasswd -s {{ ldap_server_rootpw }} 
@@ -14,12 +16,12 @@
 - name: Copy the slapd.conf configuration file for Redhat
   template:
     src: slapd.conf.j2
-    dest: {{ ldap_server_app_path }}/slapd.conf
+    dest: "{{ ldap_server_app_path }}/slapd.conf"
   notify: 
    - restart slapd
 
 - name: Copy the ldap.conf configuration file
   template:
     src: ldap.conf.j2
-    dest: {{ ldap_server_app_path }}/ldap.conf
+    dest: "{{ ldap_server_app_path }}/ldap.conf"
 

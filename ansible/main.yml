@@ -17,11 +17,17 @@
 
 - name: ldap
   hosts: ldap
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
   roles:
     - ldap
 
 - name: kerberos
   hosts: kerberos
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
   roles:
     - kerberos
 
