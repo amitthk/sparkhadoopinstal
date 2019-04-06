@@ -15,6 +15,7 @@ module "hdpsparkstack_spot" {
   private_subnets_cidr_blocks = "${var.private_subnets_cidr_blocks}"
   spot_hdpspark_master_count = "${var.spot_hdpspark_master_count}"
   spot_hdpspark_worker_count = "${var.spot_hdpspark_worker_count}"
+  spot_hdpspark_gateway_count = "${var.spot_hdpspark_gateway_count}"
   ingress_from_port = "${var.ingress_from_port}"
   ingress_to_port = "${var.ingress_to_port}"
   vpc_cidr = "${var.vpc_cidr}"

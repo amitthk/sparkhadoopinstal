@@ -17,7 +17,8 @@ variable "ami_id" {}
 variable "vpc_cidr" {}
 variable "public_subnets_cidr_blocks" {}
 variable "private_subnets_cidr_blocks" {}
-variable "spot_hdpspark_master_count" {}
-variable "spot_hdpspark_worker_count" {}
+variable "spot_hdpspark_master_count" { default = 1 }
+variable "spot_hdpspark_worker_count" { default = 1 }
+variable "spot_hdpspark_gateway_count" { default = 1}
 variable "ingress_from_port" {}
 variable "ingress_to_port" {}

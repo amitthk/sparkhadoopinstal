@@ -14,13 +14,13 @@ inventory_template = '''
 {spot_hdpspark_worker}
 
 [ldap]
-{spot_hdpspark_master}
+{spot_hdpspark_gateway}
 
 [kerberos]
-{spot_hdpspark_master}
+{spot_hdpspark_gateway}
 
 [db]
-{spot_hdpspark_master}
+{spot_hdpspark_gateway}
 '''
 
 def parse_file(file_name):

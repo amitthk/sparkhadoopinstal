@@ -63,6 +63,11 @@ variable "spot_hdpspark_worker_count" {
   default = 3
 }
 
+variable "spot_hdpspark_gateway_count" {
+  description = "hdpspark_gateway_count"
+  default = 1
+}
+
 variable "spot_price" {
   description = "spot_price"
   default = 0.0045
