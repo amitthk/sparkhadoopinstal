@@ -1,5 +1,5 @@
 [libdefaults]
-    default_realm = {{ krb_root_domain|upper }}
+    default_realm = {{ krb_default_realm|upper }}
     dns_lookup_realm = false
     dns_lookup_kdc = false
     ticket_lifetime = 24h
@@ -10,15 +10,15 @@
     permitted_enctypes = des-cbc-md5 des-cbc-crc des3-cbc-sha1
 
 [realms]
-    {{ krb_root_domain|upper }} = {
+    {{ krb_default_realm|upper }} = {
         kdc = kdc.{{ krb_default_realm}}:88
         admin_server = kdc.{{ krb_default_realm}}:749
         default_domain = {{ krb_default_realm}}
     }
 
 [domain_realm]
-    .{{ krb_default_realm}} = {{ krb_root_domain|upper }}
-     {{ krb_default_realm}} = {{ krb_root_domain|upper }}
+    .{{ krb_default_realm}} = {{ krb_default_realm|upper }}
+     {{ krb_default_realm}} = {{ krb_default_realm|upper }}
 
 [logging]
     kdc = FILE:/var/log/krb5kdc.log

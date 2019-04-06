@@ -8,7 +8,7 @@
   become_user: "{{ansible_become_user}}"
   become_method: "{{ansible_become_method}}"
 
-- name: Install the openldap and required Packages
+- name: Install the kerberos and required Packages
   yum:
     name: "{{ kerberos_server_pkgs }}"
     state: installed

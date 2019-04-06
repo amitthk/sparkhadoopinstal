@@ -1,11 +1,11 @@
-default_realm = {{ krb_root_domain|upper }}
+default_realm = {{ krb_default_realm|upper }}
 
 [kdcdefaults]
     v4_mode = nopreauth
     kdc_ports = 0
 
 [realms]
-    {{ krb_root_domain|upper }} = {
+    {{ krb_default_realm|upper }} = {
         kdc_ports = 88
         admin_keytab = /etc/kadm5.keytab
         database_name = /var/kerberos/krb5kdc/principal

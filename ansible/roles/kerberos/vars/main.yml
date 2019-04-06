@@ -1,6 +1,6 @@
 ---
 # vars file for kerberos
-krb_root_domain: atksv.mywire.org
+krb_default_realm: atksv.mywire.org
 kerberos_server_pkgs:
   - krb5-server
   - krb5-libs
