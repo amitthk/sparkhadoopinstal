@@ -10,9 +10,8 @@
 
 - name: Install the openldap and required Packages
   yum:
-    name: "{{ item }}"
+    name: "{{ kerberos_server_pkgs }}"
     state: installed
-  with_items: kerberos_server_pkgs
   become: yes
   become_user: "{{ansible_become_user}}"
   become_method: "{{ansible_become_method}}"
