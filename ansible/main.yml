@@ -15,15 +15,15 @@
   roles:
     - db
 
-# - name: ldap
-#   hosts: ldap
-#   roles:
-#     - ldap
+- name: ldap
+  hosts: ldap
+  roles:
+    - ldap
 
-# - name: kerberos
-#   hosts: kerberos
-#   roles:
-#     - kerberos
+- name: kerberos
+  hosts: kerberos
+  roles:
+    - kerberos
 
 - name: hadoop install
   hosts: all

@@ -1,2 +1,5 @@
 ---
 # defaults file for ldap
+ldap_server_domain_name: atksv.mywire.org
+ldap_server_rootpw: changethis
+ldap_server_enable_ssl: false
