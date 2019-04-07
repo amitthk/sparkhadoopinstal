@@ -18,3 +18,9 @@
   service:
     name: mariadb
     state: started
+
+- name: Open up FirewallD for mariadb 
+  command: "{{ item }}"
+  with_items:
+  - firewall-cmd --zone=dmz --add-port=3306/tcp --permanent
+  - firewall-cmd --reload

@@ -49,3 +49,8 @@
     src: ldap.conf.j2
     dest: "{{ ldap_server_app_path }}/ldap.conf"
 
+- name: Open up FirewallD for ldap 
+  command: "{{ item }}"
+  with_items:
+  - firewall-cmd --zone=dmz --add-port=389/tcp --permanent
+  - firewall-cmd --reload
