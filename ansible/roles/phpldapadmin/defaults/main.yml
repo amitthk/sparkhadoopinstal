@@ -2,4 +2,5 @@
 php_ldap_admin_pkgs:
   - httpd
   - php
-  - php5-ldap
+  - php-ldap
+  - phpldapadmin

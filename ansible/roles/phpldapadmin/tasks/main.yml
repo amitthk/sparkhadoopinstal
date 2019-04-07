@@ -19,17 +19,16 @@
 #     src: config.php.j2
 #     dest: /etc/phpldapadmin/config.php
 
-- name: copy config.php
-  shell: "cp /etc/phpldapadmin/config.php.sample /etc/phpldapadmin/config.php"
+# - name: copy config.php
+#   shell: "cp /etc/phpldapadmin/config.php.sample /etc/phpldapadmin/config.php"
 
-# - name: process config.php
-#   lineinfile:
-#     path: /etc/phpldapadmin/config.php
-#     regexp: "{{item.o}}"
-#     line: "{{item.n}}"
-#   with_items:
-#     - { o: ^\$servers\-\>setValue\('server'\,'tls'\,true\);, n: $servers->setValue('server','tls',false);}
-#     - { o: ^//\s*\$servers\-\>setValue\('login'\,'attr'\,'dn'\);, n: $servers->setValue('login','attr','dn');}
+- name: process config.php
+  lineinfile:
+    path: /etc/phpldapadmin/config.php
+    regexp: "{{item.o}}"
+    line: "{{item.n}}"
+  with_items:
+    - { o: "\'server\',\'host\',\'127.0.0.1\'", n: "'server','host','{{ hostvars[groups['ldap'][0]]['ansible_default_ipv4']['address'] }}'"}
 
 - name: Open up FirewallD for httpd 
   command: "{{ item }}"

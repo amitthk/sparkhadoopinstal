@@ -11,7 +11,7 @@ parameters {
     choice(name: 'DEPLOY_ENV', choices: ['dev','sit','uat','prod'], description: 'Select the deploy environment')
     choice(name: 'ACTION_TYPE', choices: ['deploy','create','destroy'], description: 'Create or destroy')
     choice(name: 'INSTANCE_TYPE', choices: ['t2.micro','m3.medium','m3.large'], description: 'Type of instance')
-    string(name: 'SPOT_PRICE', defaultValue: '0.008', description: 'Spot price')
+    string(name: 'SPOT_PRICE', defaultValue: '0.005', description: 'Spot price')
     string(name: 'SPOT_HDPSPARK_MASTER_COUNT', defaultValue: '1', description: 'Masters count')
     string(name: 'SPOT_HDPSPARK_WORKER_COUNT', defaultValue: '1', description: 'Worker price')
 }
