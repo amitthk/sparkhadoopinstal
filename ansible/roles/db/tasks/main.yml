@@ -9,3 +9,12 @@
   with_items:
     - mariadb-server
     - mariadb
+
+- name: enable the mariadb service
+  service:
+    name: mariadb
+    enabled: yes
+- name: start the mariadb service
+  service:
+    name: mariadb
+    state: started

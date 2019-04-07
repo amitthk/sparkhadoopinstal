@@ -22,6 +22,14 @@
 # - name: copy config.php
 #   shell: "cp /etc/phpldapadmin/config.php.sample /etc/phpldapadmin/config.php"
 
+- name: move all the httpd default confs
+  shell: "for f in /etc/httpd/conf.d/*.conf; do mv $f $f.bak ;done"
+- name: revert back the php.conf and phpldapadmin.conf
+  shell: "mv /etc/httpd/conf.d/{{item}}.bak /etc/httpd/conf.d/{{item}}"
+  with_items:
+    - 'php.conf'
+    - 'phpldapadmin.conf'
+
 - name: process config.php
   lineinfile:
     path: /etc/phpldapadmin/config.php
