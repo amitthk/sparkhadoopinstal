@@ -11,5 +11,5 @@ autopurge.snapRetainCount={{ zookeeper_autopurge_snapRetainCount }}
 {% endif %}
 
 {% for host in groups["zookeeper"] %}
-server.{{hostvars[item].ansible_nodename}}={{hostvars[host]['ansible_eth1']['ipv4']['address']}}:{{zookeeper_cluster_ports}}
+server.{{hostvars[host].ansible_nodename}}={{hostvars[host]['ansible_eth1']['ipv4']['address']}}:{{zookeeper_cluster_ports}}
 {% endfor %}
