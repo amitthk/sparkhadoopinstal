@@ -30,13 +30,13 @@
     - 'php.conf'
     - 'phpldapadmin.conf'
 
-- name: process config.php
-  lineinfile:
-    path: /etc/phpldapadmin/config.php
-    regexp: "{{item.o}}"
-    line: "{{item.n}}"
-  with_items:
-    - { o: "\$servers->setValue\(\'server\',\'host\',\'127.0.0.1\'\);", n: "$servers->setValue('server','host','{{ hostvars[groups['ldap'][0]]['inventory_hostname'] }}');"}
+# - name: process config.php
+#   lineinfile:
+#     path: /etc/phpldapadmin/config.php
+#     regexp: "{{item.o}}"
+#     line: "{{item.n}}"
+#   with_items:
+#     - { o: "\$servers->setValue\(\'server\',\'host\',\'127.0.0.1\'\);", n: "$servers->setValue('server','host','{{ hostvars[groups['ldap'][0]]['inventory_hostname'] }}');"}
 
 
 - name: Open up FirewallD for httpd 
@@ -45,5 +45,8 @@
   - firewall-cmd --permanent --zone=public --add-service=http
   - firewall-cmd --zone=public --permanent --add-service=https
   - firewall-cmd --zone=public --add-port=8080/tcp --permanent
+  - firewall-cmd --permanent --zone=dmz --add-service=http
+  - firewall-cmd --zone=dmz --permanent --add-service=https
+  - firewall-cmd --zone=dmz --add-port=8080/tcp --permanent
   - firewall-cmd --reload
   # - setsebool -P httpd_can_connect_ldap on
