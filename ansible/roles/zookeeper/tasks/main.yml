@@ -70,11 +70,13 @@
     mode: '0644'
 
 - name: start zookeeper
-  shell: /zookeeper/bin/zkServer.sh start
+  shell: "{{zookeeper_target_dir}}/bin/zkServer.sh start"
+
+- name: stop zookeeper
+  shell: "{{zookeeper_target_dir}}/bin/zkServer.sh stop"
 
 - name: Setup the Systemd service
   template: src=zookeeper.service.j2 dest=/lib/systemd/system/zookeeper.service
-  when: ansible_service_mgr == 'systemd'
   notify:
     - Reload systemctl daemon
     - Restart zookeeper

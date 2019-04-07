@@ -9,7 +9,7 @@ Wants=network.target
 Type=simple
 User=zookeeper
 Group=zookeeper
-ExecStart={{zookeeper_dir}}/bin/zkServer.sh start-foreground
+ExecStart={{zookeeper_target_dir}}/bin/zkServer.sh start-foreground
 Restart=always
 RestartSec=3
 
