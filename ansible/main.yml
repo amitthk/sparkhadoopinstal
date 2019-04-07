@@ -31,6 +31,14 @@
   roles:
     - kerberos
 
+- name: zookeeper install
+  hosts: zookeeper
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - zookeeper
+
 - name: hadoop install
   hosts: all
   become: yes

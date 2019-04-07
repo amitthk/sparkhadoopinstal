@@ -13,6 +13,12 @@ inventory_template = '''
 [workers]
 {spot_hdpspark_worker}
 
+[zookeeper]
+{spot_hdpspark_worker}
+
+[gateway]
+{spot_hdpspark_gateway}
+
 [ldap]
 {spot_hdpspark_gateway}
 

@@ -11,6 +11,8 @@ hive_version: 2.3.4
 spark_mirror_url: http://atksv.mywire.org
 spark_version : '2.4.0'
 spark_hadoop_version : hadoop2.7
+zookeeper_mirror_url: http://archive.apache.org/dist/zookeeper
+zookeeper_version: 3.4.6
 install_base_dir: /usr/local
 data_dir: /data/hadoop
 openjdk_version: 1.8.0
