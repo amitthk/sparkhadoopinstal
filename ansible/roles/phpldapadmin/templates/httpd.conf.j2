@@ -1,4 +1,4 @@
-Listen 8080
+Listen 80
 
 Include conf.modules.d/*.conf
 
@@ -7,7 +7,7 @@ Group apache
 
 ServerName localhost
 ServerAdmin root@localhost
-ErrorLog ${APACHE_LOG_DIR}/error.log
+ErrorLog /var/log/httpd/error.log
 
 <Directory />
     AllowOverride none
