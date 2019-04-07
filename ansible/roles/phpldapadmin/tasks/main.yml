@@ -36,4 +36,4 @@
   - firewall-cmd --permanent --zone=public --add-service=http
   - firewall-cmd --zone=public --permanent --add-service=https
   - firewall-cmd --reload
-  - setsebool -P httpd_can_connect_ldap on
+  # - setsebool -P httpd_can_connect_ldap on
