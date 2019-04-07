@@ -1,0 +1,40 @@
+---
+- name: install the packages
+  yum:
+    name: "{{php_ldap_admin_pkgs}}"
+    state: present
+
+- name: Process httpd.conf
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+
+- name: Process phpldapadmin.conf
+  template:
+    src: phpldapadmin.conf.j2
+    dest: /etc/httpd/conf.d/phpldapadmin.conf
+
+# - name: Process config.php
+#   template:
+#     src: config.php.j2
+#     dest: /etc/phpldapadmin/config.php
+
+- name: copy config.php
+  shell: "cp /etc/phpldapadmin/config.php.sample /etc/phpldapadmin/config.php"
+
+# - name: process config.php
+#   lineinfile:
+#     path: /etc/phpldapadmin/config.php
+#     regexp: "{{item.o}}"
+#     line: "{{item.n}}"
+#   with_items:
+#     - { o: ^\$servers\-\>setValue\('server'\,'tls'\,true\);, n: $servers->setValue('server','tls',false);}
+#     - { o: ^//\s*\$servers\-\>setValue\('login'\,'attr'\,'dn'\);, n: $servers->setValue('login','attr','dn');}
+
+- name: Open up FirewallD for httpd 
+  command: "{{ item }}"
+  with_items:
+  - firewall-cmd --permanent --zone=public --add-service=http
+  - firewall-cmd --zone=public --permanent --add-service=https
+  - firewall-cmd --reload
+  - setsebool -P httpd_can_connect_ldap on
