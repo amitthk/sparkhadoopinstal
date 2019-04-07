@@ -23,6 +23,14 @@
   roles:
     - ldap
 
+- name: phpldapadmin
+  hosts: ldap
+  become: yes
+  become_user: "{{ansible_become_user}}"
+  become_method: "{{ansible_become_method}}"
+  roles:
+    - phpldapadmin
+
 - name: kerberos
   hosts: kerberos
   become: yes
