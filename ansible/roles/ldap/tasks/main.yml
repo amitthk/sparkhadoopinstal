@@ -36,6 +36,9 @@
     owner: "{{ ldap_server_user }}"
     group: "{{ ldap_server_user }}"
 
+- name: generate the server root passwd hash
+  command: slappasswd -h {{ ldap_password_hash_type }} -s {{ ldap_server_rootpw }}
+  register: ldap_rootpw_hash
 
 - name: Copy the slapd.conf configuration file for Redhat
   template:
