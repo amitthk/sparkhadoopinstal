@@ -6,6 +6,8 @@ pipeline{
 
 agent any
 
+options { timeout(time: 1, unit: 'HOURS') }
+
 parameters {
     password(name:'AWS_KEY', defaultValue: '', description:'Enter AWS_KEY')
     choice(name: 'DEPLOY_ENV', choices: ['dev','sit','uat','prod'], description: 'Select the deploy environment')
@@ -28,6 +30,9 @@ stages{
         env.SPOT_HDPSPARK_MASTER_COUNT = "$params.SPOT_HDPSPARK_MASTER_COUNT"
         env.SPOT_HDPSPARK_WORKER_COUNT= "$params.SPOT_HDPSPARK_WORKER_COUNT"
         env.APP_ID = getEnvVar("${env.DEPLOY_ENV}",'APP_ID')
+        env.repo_bucket_credentials_id = "s3repoadmin";
+        env.aws_s3_bucket_name = 'jvcdp-repo';
+        env.aws_s3_bucket_region = 'ap-southeast-1';
         env.APP_BASE_DIR = pwd()
         env.GIT_HASH = sh (script: "git rev-parse --short HEAD", returnStdout: true)
         env.TIMESTAMP = sh (script: "date +'%Y%m%d%H%M%S%N' | sed 's/[0-9][0-9][0-9][0-9][0-9][0-9]\$//g'", returnStdout: true)
@@ -59,6 +64,22 @@ stages{
             chmod 755 $APP_BASE_DIR/terraform/make_inventory.py
             python $APP_BASE_DIR/terraform/make_inventory.py $APP_BASE_DIR/terraform/terraform.tfstate
             '''
+            }
+            script{
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                credentialsId: "${repo_bucket_credentials_id}", 
+                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
+                    for(distFileName in ["ansible/hosts","terraform/terraform.tfstate"]) {
+                            awsIdentity() //show us what aws identity is being used
+                            def srcLocation = "${APP_BASE_DIR}"+"/"+"${distFileName}";
+                            def distLocation = 'terraform/sparkhadoopinstal/' + "${env.TIMESTAMP}"+"/"+ distFileName;
+                            echo "Uploading ${srcLocation} to ${distLocation}"
+                            withAWS(region: "${env.aws_s3_bucket_region}"){
+                            s3Upload(file: srcLocation, bucket: "${env.aws_s3_bucket_name}", path: distLocation)
+                            }
+                        }
+                }
             }
         }
     }
