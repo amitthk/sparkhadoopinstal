@@ -20,6 +20,9 @@ resource "aws_spot_instance_request" "spot_hdpspark_worker" {
       Name = "spot_hdpspark_worker-${count.index}"
   }
 
+  root_block_device {
+    delete_on_termination = true
+ }
 
   provisioner "local-exec" {
     command = "aws ec2 create-tags --resources ${self.spot_instance_id} --tags Key=Name,Value=spot_hdpspark_worker-${count.index}"
