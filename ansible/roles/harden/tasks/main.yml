@@ -1,0 +1,47 @@
+---
+- name: Check passwords file exist on localhost
+  stat:
+    path: "{{inventory_dir}}/host_passwords"
+  register: passwds_stat_result
+  delegate_to: localhost
+  become: no
+
+- name: ensure passwords file exist on localhost
+  file:
+    path: "{{inventory_dir}}/host_passwords"
+    state: touch
+  delegate_to: localhost
+  become: no
+  when: passwds_stat_result.stat.exists == False 
+
+- name: create the service users
+  include_tasks: users.yml
+
+- name: setup ssh keys
+  include_tasks: ssh-keys.yml
+
+- name: set passwords for users
+  include_tasks: set-random-passwd.yml
+  with_items:
+    - "{{service_accounts}}"
+
+- name: set random password for root as well
+  include_tasks: set-random-passwd.yml
+  with_items:
+    - root
+
+- pam_limits:
+    domain: "{{item}}"
+    limit_type: hard
+    limit_item: nofile
+    value: 65555
+  with_items:
+    - "{{service_accounts}}"
+
+- sysctl:
+    name: vm.max_map_count
+    value: 262644
+    state: present
+
+- name: remove sudo
+  include_tasks: remove-sudo.yml
